@@ -43,7 +43,7 @@ export const Card: React.FC<CardProps> = ({
     type: "spring" as const,
     damping: 18,
     stiffness: 300,
-    delay: dealIndex !== undefined ? dealIndex * 0.04 : 0, // 60ms stagger
+    delay: 0, // instant
   };
 
   if (!card.faceUp) {

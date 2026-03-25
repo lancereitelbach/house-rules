@@ -40,7 +40,7 @@ export const StartScreen: React.FC = () => {
           transition={{ ...springConfig, delay: 0.05 }}
           className="flex justify-center mb-8"
         >
-          <div className="w-24 h-24 rounded-full border-2 border-accent-gold flex items-center justify-center bg-accent-gold bg-opacity-10">
+          <div className="w-24 h-24 rounded-full border-2 border-accent-gold flex items-center justify-center bg-paper-100">
             <span className="text-6xl text-accent-gold font-light" style={{ fontFamily: "'Noto Serif JP', serif" }}>
               安
             </span>
