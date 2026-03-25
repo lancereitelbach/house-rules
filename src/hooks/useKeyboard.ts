@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useGameState } from './useGameState';
 import { COL_KEYS, FOUND_KEYS } from '../game/constants';
+import type { QAmbiguityEntry } from '../game/types';
 
 export const useKeyboard = () => {
   const {
