@@ -457,8 +457,7 @@ export const useGameState = create<GameState & GameActions>((set, get) => ({
     // Prefer foundation if only one exists
     if (fds.length >= 1 && tds.length === 0) {
       get().saveHistory();
-      // @ts-ignore - Zone type is correct at runtime
-      get().moveToFoundation(zone, col, fds[0]);
+      get().moveToFoundation(zone as 'waste' | 'tableau' | 'foundation', col, fds[0]);
       get().audioCallbacks.foundationPlace?.();
       return;
     }
@@ -466,9 +465,8 @@ export const useGameState = create<GameState & GameActions>((set, get) => ({
     // If only one tableau destination
     if (fds.length === 0 && tds.length === 1) {
       get().saveHistory();
-      get().moveToTableau(zone, col, tds[0]);
+      get().moveToTableau(zone as 'waste' | 'tableau' | 'foundation', col, tds[0]);
       get().audioCallbacks.cardPlace?.();
-      // @ts-ignore - Zone type is correct at runtime
       return;
     }
     

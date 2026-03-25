@@ -151,7 +151,6 @@ export const useKeyboard = () => {
                   useGameState.setState({
                     mode: 'ambiguity_q_c',
                     ambiguityFoundIdx: fi,
-    // @ts-ignore - Ambiguity type narrowing
                     ambiguityDests: entry,
                     highlights: entry.tds.map(c => ({ type: 'tableau' as const, col: c })),
                   });
@@ -164,7 +163,6 @@ export const useKeyboard = () => {
           else if (mode === 'ambiguity_q_c') {
             const entry = state.ambiguityDests as { fi: number; card: any; tds: number[] };
             const fi = state.ambiguityFoundIdx;
-        // @ts-ignore - Safe type conversion
             
             // Column keys (UIOP/JKL)
             if (key in COL_KEYS) {
