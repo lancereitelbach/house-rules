@@ -285,13 +285,20 @@ function layout(){
   const cardWbyHeight = Math.floor(cardHbyHeight / 1.42);
   const cardW  = Math.max(Math.min(cardWbyWidth, cardWbyHeight), mobile?38:56);
   const cardH  = Math.round(cardW*1.42);
-  // Center the entire table horizontally
   const totalW = cardW*7 + gap*6;
   const offsetX = Math.floor((W - totalW) / 2);
   const topY   = pad;
   const tabY   = topY + cardH + pad*2.4;
   const fdOvlp = Math.max(5, cardH*0.13);
-  const fuOvlp = Math.max(14, cardH*0.27);
+  // Dynamic face-up overlap — squeezes cards together when column is tall
+  const maxCol = Math.max(...S.tableau.map(col=>col.length));
+  const availH = H - tabY - cardH - 50;
+  const maxFaceUp = Math.max(...S.tableau.map(col=>col.filter(c=>c.faceUp).length));
+  const faceDownRows = Math.max(...S.tableau.map(col=>col.filter(c=>!c.faceUp).length));
+  const spaceForFaceUp = availH - faceDownRows * fdOvlp;
+  const fuOvlp = maxFaceUp > 1
+    ? Math.max(10, Math.min(Math.floor(spaceForFaceUp / maxFaceUp), Math.max(14, cardH*0.27)))
+    : Math.max(14, cardH*0.27);
   CARD_R = Math.max(8, Math.min(18, cardW*0.13));
   return {W,H,pad,cardW,cardH,gap,topY,tabY,fdOvlp,fuOvlp,railW,offsetX};
 }
