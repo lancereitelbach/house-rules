@@ -1,10 +1,10 @@
-#House Rules - Klondike Zen Solitaire
+# House Rules - Klondike Zen Solitaire
 
 **[▶️ Play Now](https://lancereitelbach.github.io/house-rules/)**
 
 A keyboard-first Klondike Solitaire game with Japanese Zen minimalist aesthetic.
 
-##Features
+## Features
 
 - Complete Klondike Solitaire (Draw 1/3, undo, auto-place, statistics)
 - Keyboard-first design (no mouse required)
