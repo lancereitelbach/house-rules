@@ -17,7 +17,9 @@ export const GameBoard: React.FC = () => {
   } = useGameState();
   
   const [isShuffling, setIsShuffling] = useState(false);
+  const [wasteCardKey, setWasteCardKey] = useState(0);
   const prevStockLengthRef = useRef(stock.length);
+  const prevWasteLengthRef = useRef(waste.length);
   
   // Detect recycle (stock length increases from 0)
   useEffect(() => {
@@ -27,13 +29,22 @@ export const GameBoard: React.FC = () => {
     }
     prevStockLengthRef.current = stock.length;
   }, [stock.length]);
+  
+  // Detect new cards drawn to waste
+  useEffect(() => {
+    if (waste.length > prevWasteLengthRef.current) {
+      // New card(s) drawn - trigger animation
+      setWasteCardKey(prev => prev + 1);
+    }
+    prevWasteLengthRef.current = waste.length;
+  }, [waste.length]);
 
   // Layout calculations
   const cardWidth = 96;
   const cardHeight = 136;
   const gap = 16;
   const topPadding = 48;
-  const tableauTopMargin = 220;
+  const tableauTopMargin = 180;
   const statusBarHeight = 60; // Status bar at bottom
   const bottomPadding = 24;
 
@@ -150,20 +161,48 @@ export const GameBoard: React.FC = () => {
                   {/* Show last 3 cards if draw-3, or just last card if draw-1 */}
                   {drawCount === 3 && waste.length >= 3 && (
                     <>
-                      <div className="absolute" style={{ left: 0, top: 0 }}>
+                      <motion.div 
+                        key={`waste-${wasteCardKey}-2`}
+                        className="absolute" 
+                        style={{ left: 0, top: 0 }}
+                        initial={{ opacity: 0, y: -20, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        transition={{ duration: 0.15, ease: 'easeOut' }}
+                      >
                         <Card card={waste[waste.length - 3]} width={cardWidth} height={cardHeight} />
-                      </div>
-                      <div className="absolute" style={{ left: 20, top: 0 }}>
+                      </motion.div>
+                      <motion.div 
+                        key={`waste-${wasteCardKey}-1`}
+                        className="absolute" 
+                        style={{ left: 20, top: 0 }}
+                        initial={{ opacity: 0, y: -20, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        transition={{ duration: 0.15, ease: 'easeOut', delay: 0.05 }}
+                      >
                         <Card card={waste[waste.length - 2]} width={cardWidth} height={cardHeight} />
-                      </div>
+                      </motion.div>
                     </>
                   )}
                   {drawCount === 3 && waste.length === 2 && (
-                    <div className="absolute" style={{ left: 0, top: 0 }}>
+                    <motion.div 
+                      key={`waste-${wasteCardKey}-1`}
+                      className="absolute" 
+                      style={{ left: 0, top: 0 }}
+                      initial={{ opacity: 0, y: -20, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      transition={{ duration: 0.15, ease: 'easeOut' }}
+                    >
                       <Card card={waste[waste.length - 2]} width={cardWidth} height={cardHeight} />
-                    </div>
+                    </motion.div>
                   )}
-                  <div className="absolute" style={{ left: drawCount === 3 && waste.length >= 2 ? 40 : 0, top: 0 }}>
+                  <motion.div 
+                    key={`waste-${wasteCardKey}-0`}
+                    className="absolute" 
+                    style={{ left: drawCount === 3 && waste.length >= 2 ? 40 : 0, top: 0 }}
+                    initial={{ opacity: 0, y: -20, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    transition={{ duration: 0.15, ease: 'easeOut', delay: drawCount === 3 ? 0.1 : 0 }}
+                  >
                     <Card
                       card={waste[waste.length - 1]}
                       isCursor={isCursorOn('waste', -1)}
@@ -171,7 +210,7 @@ export const GameBoard: React.FC = () => {
                       width={cardWidth}
                       height={cardHeight}
                     />
-                  </div>
+                  </motion.div>
                 </div>
               ) : (
                 /* Empty waste slot */
