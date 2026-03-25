@@ -1,4 +1,4 @@
-import { Variants, Transition } from 'framer-motion';
+import type { Variants, Transition } from 'framer-motion';
 
 // Core spring configuration - Zen aesthetic (slow, deliberate)
 export const springConfig: Transition = {
@@ -57,7 +57,6 @@ export const buttonTap = {
 
 // Confetti/particle animations
 export const confettiFall = (
-  startX: number,
   swayAmplitude: number,
   rotation: number,
   duration: number
@@ -86,7 +85,7 @@ export const confettiFall = (
 // Stagger children - for list animations
 export const staggerChildren = (delayChildren: number = 0.1): Transition => ({
   staggerChildren: delayChildren,
-});
+} as Transition);
 
 // Medal/icon rotation entrance
 export const medalEntrance: Variants = {
@@ -94,8 +93,8 @@ export const medalEntrance: Variants = {
   animate: { opacity: 1, scale: 1, rotateZ: 0 },
 };
 
-// Stats card entrance
-export const statsCardEntrance = (delay: number): Variants => ({
+// Stats card entrance - return just the transition object
+export const statsCardEntrance = (delay: number) => ({
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
   transition: { ...springConfig, delay },
