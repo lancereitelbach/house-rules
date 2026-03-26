@@ -89,25 +89,7 @@ export const WinScreen: React.FC = () => {
           transition={{ ...springConfig, delay: 0.3 }}
           className="flex justify-center mb-6"
         >
-          <div className="w-20 h-20 rounded-full bg-accent-gold bg-opacity-60 border-2 border-accent-gold flex items-center justify-center">
-            {/* Simple crown icon */}
-            <svg 
-              width="32" 
-              height="32" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="text-paper-100"
-            >
-              <path d="M2 12l3-3 4 4 4-4 4 4 3-3v9H2z" />
-              <circle cx="7" cy="9" r="1" fill="currentColor" />
-              <circle cx="12" cy="5" r="1" fill="currentColor" />
-              <circle cx="17" cy="9" r="1" fill="currentColor" />
-            </svg>
-          </div>
+          <div className="w-20 h-20 rounded-full bg-accent-gold bg-opacity-60 border-2 border-accent-gold flex items-center justify-center" />
         </motion.div>
 
         {/* Title */}
