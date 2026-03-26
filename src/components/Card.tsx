@@ -45,13 +45,13 @@ export const Card: React.FC<CardProps> = ({
     // Cascade animation for smart select multi-card moves
     // Extract index from cascadeKey (cascadeKey = timestamp + index)
     const baseKey = Math.floor(card.cascadeKey / 100) * 100;
-    const cascadeIndex = card.cascadeKey - baseKey;
+    //const cascadeIndex = card.cascadeKey - baseKey;
     
     animationConfig = {
       type: "spring" as const,
       damping: 18,
       stiffness: 280,
-      delay: cascadeIndex * 0.08, // 80ms stagger for cascade effect
+      delay: 0
     };
   } else if (dealIndex !== undefined) {
     // Initial deal animation
